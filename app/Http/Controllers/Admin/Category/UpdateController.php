@@ -7,12 +7,12 @@ use App\Http\Requests\Admin\Category\UpdateRequest;
 use App\Models\Category;
 
 
-class StoreController extends Controller
+class UpdateController extends Controller
 {
-    public function __invoke(UpdateRequest $request)
+    public function __invoke(UpdateRequest $request ,Category $category )
     {
         $data = $request->validated();
-        Category::firstOrCreate($data);
-        return redirect()->route('admin.category.index');
+        $category->update($data);
+        return view('admin.category.show', compact('category'));
     }
 }
